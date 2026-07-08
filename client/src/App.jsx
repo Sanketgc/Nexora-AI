@@ -15,11 +15,11 @@ const App =( ) =>{
     return<>
      <header>
         <Show when="signed-out">
-          <SignInButton />
-          <SignUpButton />
+          {/* <SignInButton />
+          <SignUpButton /> */}
         </Show>
         <Show when="signed-in">
-          <UserButton />
+          {/* <UserButton /> */}
         </Show>
       </header>
     <div>
