@@ -39,7 +39,7 @@ const Footer = () => {
                 </div>
             </div>
             <p className="pt-4 text-center text-xs md:text-sm pb-5">
-                Copyright 2026 © <a href="https://prebuiltui.com">Sanket</a>. All Right Reserved.
+                Copyright 2026 © <a href="https://prebuiltui.com">Quick.ai</a>. All Right Reserved.
             </p>
         </footer>
     )
