@@ -36,7 +36,7 @@ bottom-0 ${sidebar ? 'translate-x-0' :
                     <NavLink key={to} to={to} end={to === '/ai' } 
                     onClick={()=> setsidebar(false)}
                     className={({isActive})=> `px-3.5 py-2.5 flex items-center
-                    gap-3 rounded ${isActive ? 'bg-gradient-to-r from-[#3c81f6] to-[#9234EA] text-white' 
+                    gap-3 rounded ${isActive ? 'bg-linear-to-r from-[#3c81f6] to-[#9234EA] text-white' 
                     : '' }  `}
                     >
 

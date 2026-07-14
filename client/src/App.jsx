@@ -3,13 +3,13 @@ import { Route, Routes } from "react-router-dom";
 import Home from './pages/Home'
 import Layout from './pages/Layout'
 import Dashboard from './pages/Dashboard'
-import WriteArticle from './pages/WriteArticle'
 import BlogTitle from './pages/BlogTitle'
 import Generateimage from './pages/Generateimage'
 import Removebackground from './pages/Removebg'
 import RemoveObject from './pages/Removeobject'
 import ReviewResume from './pages/ReviewResume'
 import { Show, SignInButton, SignUpButton, UserButton } from '@clerk/react'
+import WriteArticle from "./pages/WriteArticle";
 
 const App =( ) =>{
     return<>
