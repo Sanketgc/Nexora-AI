@@ -53,7 +53,7 @@ bottom-0 ${sidebar ? 'translate-x-0' :
 
             </div>
 
-            <div className='w-full border-t border-gray-200 p-4 px-7 items-center
+            <div className='w-full  border-t border-gray-200 p-4 px-7 items-center
             justify-between'>
                 <div onClick={openUserProfile} className='flex gap-2 items-center cursor-pointer'>
                     <img src={user.imageUrl} className='w-8 rounded-full' alt="" />

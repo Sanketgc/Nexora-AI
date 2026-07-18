@@ -10,6 +10,7 @@ import RemoveObject from './pages/Removeobject'
 import ReviewResume from './pages/ReviewResume'
 import { Show, SignInButton, SignUpButton, UserButton } from '@clerk/react'
 import WriteArticle from "./pages/WriteArticle";
+import Community from "./pages/Community";
 
 const App =( ) =>{
     return<>
@@ -33,6 +34,7 @@ const App =( ) =>{
                 <Route path="remove-background" element={<Removebackground />} />
                 <Route path="remove-object" element={<RemoveObject />} />
                 <Route path="review-resume" element={<ReviewResume />} />
+                <Route path="community" element={<Community />} />
             </Route> 
         </Routes>
     </div>
