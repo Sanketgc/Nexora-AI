@@ -33,6 +33,10 @@ const Hero = () => {
                 <img src={assets.user_group} alt="" className='h-8 '/> Trusted by 10k+
             </div>
 
+            <div className='bg-white h-20 w-20 border-2 justify-center self-center mt-25'>
+
+            </div>
+
 
 
 
