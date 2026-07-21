@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 import { clerkMiddleware} from '@clerk/express'
-import { auth } from './middlewares/auth'
+import { auth } from './middlewares/auth.js'
 
 
 const app= express()
