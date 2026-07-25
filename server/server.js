@@ -3,7 +3,7 @@ import cors from 'cors'
 import 'dotenv/config'
 import { clerkMiddleware } from '@clerk/express'
 import { auth } from './middlewares/auth.js'
-import { generateArticle, generateImage } from './controllers/aicontroller.js'
+import { generateArticle} from './controllers/aicontroller.js'
 
 const app = express()
 
@@ -13,9 +13,10 @@ app.use(clerkMiddleware())
 
 app.get('/', (req, res) => (res.send("server is live")))
 
-app.use(auth)
+// app.use(auth)
+
 app.post('/api/generate-article', generateArticle)
-app.post('/api/generate-image', generateImage)
+// app.post('/api/generate-image', generateImage)
 
 const PORT = process.env.PORT || 3000;
 
