@@ -8,11 +8,15 @@ import Generateimage from './pages/Generateimage'
 import Removebackground from './pages/Removebg'
 import RemoveObject from './pages/Removeobject'
 import ReviewResume from './pages/ReviewResume'
-import { Show, SignInButton, SignUpButton, UserButton } from '@clerk/react'
+import { getToken, Show, SignInButton, SignUpButton, UserButton } from '@clerk/react'
 import WriteArticle from "./pages/WriteArticle";
 import Community from "./pages/Community";
 
 const App =( ) =>{
+  getToken().then((token) => {
+    console.log("Token:", token);
+  })
+
     return<>
      <header>
         <Show when="signed-out">
