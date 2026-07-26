@@ -4,8 +4,12 @@ import 'dotenv/config'
 import { clerkMiddleware } from '@clerk/express'
 import { auth } from './middlewares/auth.js'
 import { generateArticle} from './controllers/aicontroller.js'
+import aiRouter from './routes/aiRoute.js'
+import connectcloudinary from './config/cloudinary.js'
 
 const app = express()
+
+await connectcloudinary()
 
 app.use(cors())
 app.use(express.json())
@@ -15,7 +19,9 @@ app.get('/', (req, res) => (res.send("server is live")))
 
 // app.use(auth)
 
-app.post('/api/generate-article', generateArticle)
+app.use('/api/ai', aiRouter)
+
+// app.post('/api/generate-article', generateArticle)
 // app.post('/api/generate-image', generateImage)
 
 const PORT = process.env.PORT || 3000;
