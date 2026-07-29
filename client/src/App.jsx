@@ -11,23 +11,16 @@ import ReviewResume from './pages/ReviewResume'
 import { getToken, Show, SignInButton, SignUpButton, UserButton } from '@clerk/react'
 import WriteArticle from "./pages/WriteArticle";
 import Community from "./pages/Community";
+import {Toaster} from 'react-hot-toast'
 
 const App =( ) =>{
-  getToken().then((token) => {
-    console.log("Token:", token);
-  })
+  // getToken().then((token) => {
+  //   console.log("Token:", token);
+  // })
 
     return<>
-     <header>
-        <Show when="signed-out">
-          {/* <SignInButton />
-          <SignUpButton /> */}
-        </Show>
-        <Show when="signed-in">
-          {/* <UserButton /> */}
-        </Show>
-      </header>
     <div>
+      <Toaster />
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path='/ai' element={ <Layout/>} >
