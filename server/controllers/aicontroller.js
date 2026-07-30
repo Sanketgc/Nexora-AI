@@ -4,8 +4,8 @@ import { clerkClient } from "@clerk/express";
 import axios from "axios";
 import { v2 as cloudinary } from 'cloudinary'
 import fs from "fs";
-import PDFParse from "../node_modules/pdf-parse/dist/pdf-parse/esm/PDFParse.js"
-
+import PDFParse  from "../node_modules/pdf-parse/dist/pdf-parse/esm/PDFParse.js";
+// const { PDFParse } = require('pdf-parse');
 
 const AI = new OpenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -363,22 +363,26 @@ export const resumeReview = async (req, res) => {
         }
 
         const dataBuffer = fs.readFileSync(resume.path)
-        let pdfp = new PDFParse(dataBuffer)
-        const pdfData = await pdfp
+        const pdfParser = new PDFParse(dataBuffer)
+        const pdfData = await pdfParser
+        const resumeText = typeof pdfData?.text === 'string' ? pdfData.text.trim() : ''
+
+        if (!resumeText) {
+            return res.json({ success: false, message: 'No readable text could be extracted from the uploaded PDF resume.' })
+        }
 
         const resumeprompt = `Review the following resume and provide constructive
        feedback on its strengths, weaknesses, and areas for improvement. Resume 
-       content: \n\n${pdfData.text}`
-
+       content: \n\n${resumeText}`
 
         const response = await AI.chat.completions.create({
             model: "gemini-3.5-flash",
-            messages: [{ role: "user", content: res, },],
+            messages: [{ role: "user", content: resumeprompt }],
             temperature: 0.7,
             max_tokens: 1000,
         });
 
-        const content = response.choices[0].message.content
+        const content = extractContent(response)
 
         await sql`insert into creations (user_id, prompt, content, type)
         values (${userId}, 'Review the uploaded resume' , ${content}, 'resume-review')`;
