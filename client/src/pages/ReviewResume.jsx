@@ -1,9 +1,10 @@
 import { useAuth } from '@clerk/react';
 import { FileText, Sparkles } from 'lucide-react';
 import React, { useState } from 'react'
-import axios from 'axios'
-import toast from 'react-hot-toast';
-import Markdown from "react-markdown"
+import { useNavigate } from 'react-router-dom'
+// import axios from 'axios'
+// import toast from 'react-hot-toast';
+// import Markdown from "react-markdown"
 
 const ReviewResume = () => {
 
@@ -12,39 +13,42 @@ const ReviewResume = () => {
     const [content, setContent] = useState('')
 
     const { getToken } = useAuth()
+    const navigate = useNavigate()
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
-        try {
-            setLoading(true)
+        // try {
+        //     setLoading(true)
 
-            const formData = new FormData()
-            formData.append('resume', input)
+        //     const formData = new FormData()
+        //     formData.append('resume', input)
 
-            const { data } = await axios.post('/api/ai/resume-review', formData,
-                { headers: { Authorization: `Bearer ${await getToken()}` } })
+        //     const { data } = await axios.post('/api/ai/resume-review', formData,
+        //         { headers: { Authorization: `Bearer ${await getToken()}` } })
 
-            if (data.success && typeof data.content === 'string') {
-                setContent(data.content)
-            } else {
-                setContent('')
-                toast.error(data.message || 'Unable to review the resume right now.')
-            }
+        //     if (data.success && typeof data.content === 'string') {
+        //         setContent(data.content)
+        //     } else {
+        //         setContent('')
+        //         toast.error(data.message || 'Unable to review the resume right now.')
+        //     }
 
-        } catch (error) {
-            setContent('')
-            toast.error(error.message || 'Unable to review the resume right now.')
-        } finally {
-            setLoading(false)
-        }
+        // } catch (error) {
+        //     setContent('')
+        //     toast.error(error.message || 'Unable to review the resume right now.')
+        // } finally {
+        //     setLoading(false)
+        // }
     }
 
     return <>
-        <div className='h-full overflow-y-scroll p-6 flex items-start flex-wrap
-    gap-4 text-slate-700 ml-70'>
 
-            <form onSubmit={onSubmitHandler} className='w-full max-w-lg p-4 bg-white rounded-lg border
+    <div className='mt-50 ml-40 grid grid-rows-2 w-full place-items-center'>
+        {/* <div className='h-full overflow-y-scroll p-6 flex items-start flex-wrap
+    gap-4 text-slate-700 ml-70'> */}
+
+            {/* <form onSubmit={onSubmitHandler} className='w-full max-w-lg p-4 bg-white rounded-lg border
         border-gray-200'>
                 <div className='flex items-center gap-3'>
                     <Sparkles className='w-6 text-[#00da83]' />
@@ -72,7 +76,7 @@ const ReviewResume = () => {
             </form>
 
 
-            {/* Right Col */}
+            Right Col
 
             <div className='w-full max-w-lg p-4 bg-white rounded-lg flex flex-col border
         border-gray-200 min-h-96  max-h-\[600px\]'>
@@ -90,15 +94,18 @@ const ReviewResume = () => {
                 </div>
                     ) :(
                         <div className='reset-tw'>
-                            {/* <img src={content} alt="image" /> */}
                             <Markdown>{content}</Markdown>
                         </div>
                     )
                 }
                 
+            </div> */}
+            <div className='self-center'>
+                <h2>This feature is not available Right Now</h2> <br /> <br />
+                <button className=' border-w-full flex justify-center items-center gap-2
+            bg-linear-to-r from-[#226BFF] to-[#65ADFF] text-white px-4 py-2
+            mt-3 ml-15 text-sm rounded-lg cursor-pointer' onClick ={() => navigate('/ai') }>Go To Dashboard</button>
             </div>
-
-
 
         </div>
     </>

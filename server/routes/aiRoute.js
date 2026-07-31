@@ -1,6 +1,6 @@
 import express from "express";
 import { auth } from "../middlewares/auth.js";
-import { generateArticle, generateBlogTitle, generateImage, removeImageBackground, removeImageObject, resumeReview } from "../controllers/aicontroller.js";
+import { generateArticle, generateBlogTitle, generateImage, removeImageBackground, removeImageObject } from "../controllers/aicontroller.js";
 import { Uploads } from "openai/resources/index.mjs";
 import upload from "../config/multer.js";
 
@@ -14,6 +14,6 @@ aiRouter.post('/remove-image-background', upload.single('image') ,auth, removeIm
 
 aiRouter.post('/remove-image-object', upload.single('image') ,auth, removeImageObject);
 
-aiRouter.post('/resume-review', upload.single('resume') , auth, resumeReview);
+// aiRouter.post('/resume-review', upload.single('resume') , auth, resumeReview);
 
 export default aiRouter;

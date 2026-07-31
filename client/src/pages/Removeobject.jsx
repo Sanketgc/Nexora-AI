@@ -13,6 +13,25 @@ const Removeobject = () => {
 
     const { getToken } = useAuth()
 
+    const handleDownload = async () => {
+        if (!content) return;
+
+        try {
+            const response = await axios.get(content, { responseType: 'blob' });
+            const blobUrl = window.URL.createObjectURL(response.data);
+            const link = document.createElement('a');
+            link.setAttribute("target", "_blank")
+            link.href = blobUrl;
+            link.download = `processed-image-${Date.now()}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(blobUrl);
+        } catch (error) {
+            toast.error('Unable to download the image right now.');
+        }
+    };
+
     // const isRenderableImage = (value) => {
     //     return typeof value === 'string' && /^(https?:\/\/|data:image\/|blob:)/i.test(value)
     // }
@@ -33,17 +52,17 @@ const Removeobject = () => {
             const { data } = await axios.post('/api/ai/remove-image-object', formData,
                 { headers: { Authorization: `Bearer ${await getToken()}` } })
 
-                 if (data.success) {
+            if (data.success) {
                 setContent(data.content)
             } else {
                 toast.error(data.message || 'Unable to generate a title right now.')
             }
 
             // if (data.success && isRenderableImage(data.content)) {
-                // setContent(data.content)
+            // setContent(data.content)
             // } else {
-                // setContent('')
-                // toast.error(data.message || 'Unable to process the image right now.')
+            // setContent('')
+            // toast.error(data.message || 'Unable to process the image right now.')
             // }
 
         } catch (error) {
@@ -71,7 +90,7 @@ const Removeobject = () => {
                     required />
 
                 <p className='text-xs text-gray-500 font-light mt-1'>
-                Supports JPG, JPEG, PNG and other image formats </p>
+                    Supports JPG, JPEG, PNG and other image formats </p>
 
                 <p className='mt-6 text-sm font-medium'>Describe object name to remove</p>
 
@@ -108,6 +127,12 @@ const Removeobject = () => {
                 ) : (
                     <div className='mt-3 h-full'>
                         <img src={content} alt="image" />
+                        <button
+                            type='button'
+                            onClick={handleDownload}
+                            className='w-full flex justify-center items-center gap-2
+            bg-linear-to-r from-[#f6ab41] to-[#ff4938] text-white px-4 py-2
+            mt-6 text-sm rounded-lg cursor-pointer'>Download Now</button>
                     </div>
                 )}
 

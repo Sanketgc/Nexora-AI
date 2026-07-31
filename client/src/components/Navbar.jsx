@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { useClerk, UserButton, useUser } from '@clerk/react'
 
-
 const Navbar = () => {
   const navigate = useNavigate()
   const { user } = useUser()
